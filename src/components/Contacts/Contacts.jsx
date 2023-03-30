@@ -41,3 +41,4 @@ Contacts.propTypes = {
   onChange: PropTypes.func.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
+
