@@ -36,7 +36,7 @@ export function Contacts({
 }
 
 Contacts.propTypes = {
-  // contacts: PropTypes.arrayOf(PropTypes.object),
+  contacts: PropTypes.arrayOf(PropTypes.object),
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
