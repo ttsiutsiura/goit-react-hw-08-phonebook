@@ -12,6 +12,7 @@ export function Contacts() {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
+  // console.log('contacts: ', contacts);
   const filterValue = useSelector(getFilterValue);
 
   const getVisibleContacts = () => {
@@ -21,7 +22,7 @@ export function Contacts() {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
-  
+
   const visibleContacts = getVisibleContacts();
 
   return (
