@@ -3,8 +3,6 @@ import { Form } from './Form/Form';
 import { Contacts } from './Contacts/Contacts';
 import { Caption } from './App.styled';
 
-// const LS_KEY = 'contacts';
-
 export function App() {
   return (
     <div
