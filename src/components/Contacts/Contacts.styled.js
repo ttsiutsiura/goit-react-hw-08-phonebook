@@ -24,7 +24,7 @@ export const FilterCaption = styled.p`
 export const DeleteButton = styled.button`
   padding: 2px;
   margin-left: auto;
-  margin-right: 30px;
+  margin-right: 16px;
   width: 70px;
   font-size: 20px;
   border-color: black;

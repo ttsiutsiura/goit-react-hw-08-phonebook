@@ -7,6 +7,11 @@ import { FormEl } from './Form.styled';
 import { addContact } from 'redux/contactsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
+import { PhoneInputEnhanced } from './Form.styled';
+import { isPossiblePhoneNumber } from 'react-phone-number-input';
+import { PhoneInputContainer } from './Form.styled';
+import { Warning } from './Form.styled';
+import 'react-phone-number-input/style.css';
 
 export function Form() {
   const [name, setName] = useState('');
@@ -15,7 +20,7 @@ export function Form() {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
-  const dispathch = useDispatch();
+  const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
 
@@ -30,12 +35,15 @@ export function Form() {
       alert(`${name} is already in contacts.`);
     } else if (contacts.find(contact => contact.number === number)) {
       alert(`${number} is already in contacts.`);
-    } else if (name.trim() === '' || number.trim() === '') {
-      alert("Enter the contact's name and number phone!");
-    } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
-      alert('Enter the correct number phone! Format: 123-45-67.');
+    } else if (name.trim() === '' || number?.trim() === '') {
+      alert("Enter the contact's name and phone number, please");
+    } else if (!number) {
+      alert("Enter the contact's name and phone number, please");
+    } else if (!isPossiblePhoneNumber(number || '')) {
+      alert('Enter a correct phone number, please');
+      return;
     } else {
-      dispathch(addContact(name, number));
+      dispatch(addContact(name, number));
     }
 
     setName('');
@@ -68,18 +76,22 @@ export function Form() {
         required
         value={name}
         onChange={handleChange}
+        placeholder={'Post Malone'}
         id={nameInputId}
       />
       <Label htmlFor={numberInputId}>Number</Label>
-      <Input
-        type="tel"
-        name="number"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        value={number}
-        onChange={handleChange}
-        id={numberInputId}
-      />
+      <PhoneInputContainer>
+        <PhoneInputEnhanced
+          international
+          placeholder="+1 408 476 2572"
+          name="number"
+          value={number}
+          onChange={setNumber}
+        />
+        {!isPossiblePhoneNumber(number || '') &&
+          number !== '' &&
+          number !== undefined && <Warning>Impossible number.</Warning>}
+      </PhoneInputContainer>
       <Button type="submit">Add contact</Button>
     </FormEl>
   );
