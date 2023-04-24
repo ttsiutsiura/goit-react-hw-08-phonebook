@@ -1,9 +1,18 @@
-import { Wrapper } from './App.styled';
-import { Form } from './Form/Form';
-import { Contacts } from './Contacts/Contacts';
-import { Caption } from './App.styled';
+import { Wrapper } from 'components/App.styled';
+import { Form } from 'components/Form/Form';
+import { Contacts } from 'components/Contacts/Contacts';
+import { Caption } from 'components/App.styled';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/operations';
 
-export function App() {
+export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <div
       style={{
@@ -23,4 +32,4 @@ export function App() {
       </Wrapper>
     </div>
   );
-}
+};

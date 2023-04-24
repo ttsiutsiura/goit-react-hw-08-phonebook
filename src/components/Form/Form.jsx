@@ -1,10 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { Label } from './Form.styled';
-import { Input } from './Form.styled';
-import { Button } from './Form.styled';
-import { FormEl } from './Form.styled';
-import { addContact } from 'redux/contactsSlice';
+import { Label, Input, Button, FormEl } from './Form.styled';
+import { addContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { PhoneInputEnhanced } from './Form.styled';
@@ -43,7 +40,7 @@ export function Form() {
       alert('Enter a correct phone number, please');
       return;
     } else {
-      dispatch(addContact(name, number));
+      dispatch(addContact({ name, number }));
     }
 
     setName('');
