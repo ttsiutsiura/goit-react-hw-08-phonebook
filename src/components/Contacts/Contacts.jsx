@@ -4,9 +4,10 @@ import { ContactsCaption } from './Contacts.styled';
 import { Filter } from 'components/Filter/Filter';
 import { ListItem } from './Contacts.styled';
 import { DeleteButton } from 'components/Contacts/Contacts.styled';
-// import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilterValue, getIsLoading } from 'redux/selectors';
+import { ThreeDots } from 'react-loader-spinner';
 
 export function Contacts() {
   const dispatch = useDispatch();
@@ -32,21 +33,32 @@ export function Contacts() {
       {visibleContacts.length === 0 && isloading === false && (
         <p>No contacts.</p>
       )}
-      {isloading && <p>Loading...</p>}
-      <ContactList>
-        {visibleContacts.map(contact => (
-          <ListItem key={contact.id}>
-            {contact.name}: {contact.number}
-            <DeleteButton
-              type="button"
-              // onClick={() => dispatch(deleteContact(contact.id))}
-              key={nanoid()}
-            >
-              Delete
-            </DeleteButton>
-          </ListItem>
-        ))}
-      </ContactList>
+      <ThreeDots
+        height="34.5"
+        width="34.5"
+        radius="9"
+        color="black"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={isloading}
+      />
+      {isloading === false && (
+        <ContactList>
+          {visibleContacts.map(contact => (
+            <ListItem key={contact.id}>
+              {contact.name}: {contact.number}
+              <DeleteButton
+                type="button"
+                onClick={() => dispatch(deleteContact(contact.id))}
+                key={nanoid()}
+              >
+                Delete
+              </DeleteButton>
+            </ListItem>
+          ))}
+        </ContactList>
+      )}
     </>
   );
 }
