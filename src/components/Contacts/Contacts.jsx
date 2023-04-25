@@ -6,29 +6,24 @@ import { ListItem } from './Contacts.styled';
 import { DeleteButton } from 'components/Contacts/Contacts.styled';
 import { deleteContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilterValue, getIsLoading } from 'redux/selectors';
+import {
+  selectContactsCount,
+  selectIsLoading,
+  selectVisibleContacts,
+} from 'redux/selectors';
 import { ThreeDots } from 'react-loader-spinner';
 
 export function Contacts() {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(getContacts);
-  const filterValue = useSelector(getFilterValue);
-  const isloading = useSelector(getIsLoading);
+  const isloading = useSelector(selectIsLoading);
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filterValue.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
-
-  const visibleContacts = getVisibleContacts();
+  const visibleContacts = useSelector(selectVisibleContacts);
+  const contactsCount = useSelector(selectContactsCount);
 
   return (
     <>
-      {<ContactsCaption>Contacts</ContactsCaption>}
+      {<ContactsCaption>Contacts: {contactsCount}</ContactsCaption>}
       {<Filter />}
       {visibleContacts.length === 0 && isloading === false && (
         <p>No contacts.</p>
@@ -47,7 +42,9 @@ export function Contacts() {
         <ContactList>
           {visibleContacts.map(contact => (
             <ListItem key={contact.id}>
-              {contact.name}: {contact.number}
+              <p>
+                {contact.name}: {contact.number}
+              </p>
               <DeleteButton
                 type="button"
                 onClick={() => dispatch(deleteContact(contact.id))}

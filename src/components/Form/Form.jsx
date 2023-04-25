@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Label, Input, Button, FormEl } from './Form.styled';
 import { addContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { PhoneInputEnhanced } from './Form.styled';
 import { isPossiblePhoneNumber } from 'react-phone-number-input';
 import { PhoneInputContainer } from './Form.styled';
@@ -19,7 +19,7 @@ export function Form() {
 
   const dispatch = useDispatch();
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();

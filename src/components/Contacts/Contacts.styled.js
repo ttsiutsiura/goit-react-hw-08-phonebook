@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ContactList = styled.ul`
-  max-height: 172px;
+  max-height: 152px;
   overflow: auto;
   padding: 0;
 `;
@@ -9,6 +9,10 @@ export const ContactList = styled.ul`
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
+
+  p {
+    height: 38px;
+  }
 `;
 
 export const ContactsCaption = styled.p`
