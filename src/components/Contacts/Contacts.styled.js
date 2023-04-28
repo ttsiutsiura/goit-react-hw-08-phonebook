@@ -11,7 +11,8 @@ export const ListItem = styled.li`
   align-items: center;
 
   p {
-    height: 38px;
+    min-height: 38px;
+    max-width: 430px;
   }
 `;
 
