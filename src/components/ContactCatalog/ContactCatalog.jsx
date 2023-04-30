@@ -1,19 +1,19 @@
-import { nanoid } from 'nanoid';
-import { ContactList } from './Contacts.styled';
-import { ContactsCaption } from './Contacts.styled';
-import { Filter } from 'components/Filter/Filter';
-import { ListItem } from './Contacts.styled';
-import { DeleteButton } from 'components/Contacts/Contacts.styled';
-import { deleteContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectContactsCount,
   selectIsLoading,
   selectVisibleContacts,
-} from 'redux/selectors';
+  selectContactsCount,
+} from 'redux/contacts/selectors';
+import { ContactList } from './ContactCatalog.styled';
+import { Filter } from 'components/Filter/Filter';
+import { ContactsCaption } from './ContactCatalog.styled';
 import { ThreeDots } from 'react-loader-spinner';
+import { ListItem } from './ContactCatalog.styled';
+import { DeleteButton } from './ContactCatalog.styled';
+import { nanoid } from 'nanoid';
+import { deleteContact } from 'redux/contacts/operations';
 
-export function Contacts() {
+export function ContactCatalog() {
   const dispatch = useDispatch();
 
   const isloading = useSelector(selectIsLoading);
@@ -22,7 +22,7 @@ export function Contacts() {
   const contactsCount = useSelector(selectContactsCount);
 
   return (
-    <>
+    <div>
       {<ContactsCaption>Contacts: {contactsCount}</ContactsCaption>}
       {<Filter />}
       {visibleContacts.length === 0 && isloading === false && (
@@ -56,6 +56,6 @@ export function Contacts() {
           ))}
         </ContactList>
       )}
-    </>
+    </div>
   );
 }

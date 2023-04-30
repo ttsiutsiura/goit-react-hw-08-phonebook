@@ -1,16 +1,16 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Label, Input, Button, FormEl } from './Form.styled';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
 import { PhoneInputEnhanced } from './Form.styled';
 import { isPossiblePhoneNumber } from 'react-phone-number-input';
 import { PhoneInputContainer } from './Form.styled';
 import { Warning } from './Form.styled';
 import 'react-phone-number-input/style.css';
 
-export function Form() {
+export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
