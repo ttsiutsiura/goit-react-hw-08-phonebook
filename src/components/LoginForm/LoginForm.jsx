@@ -4,7 +4,8 @@ import { Input } from 'components/ContactForm/Form.styled';
 import { Button } from 'components/ContactForm/Form.styled';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 
 const emailInputId = nanoid();
 const passwordInputId = nanoid();
@@ -12,10 +13,20 @@ const passwordInputId = nanoid();
 export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const location = useLocation();
-  const backLink = location.state?.from ?? '/';
 
-  const handleSubmit = evt => {};
+  const dispatch = useDispatch();
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
+  };
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -36,7 +47,7 @@ export function LoginForm() {
     <>
       {/* <Link to={backLink}>Back</Link> */}
       <FormEl onSubmit={handleSubmit} style={{ marginTop: 60 }}>
-        <Label htmlFor={emailInputId}>Name</Label>
+        <Label htmlFor={emailInputId}>Email</Label>
         <Input
           type="text"
           name="email"
@@ -48,11 +59,11 @@ export function LoginForm() {
         />
         <Label htmlFor={passwordInputId}>Password</Label>
         <Input
-          type="email"
-          name="email"
+          type="password"
+          name="password"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          value={email}
+          value={password}
           onChange={handleChange}
           id={passwordInputId}
         />

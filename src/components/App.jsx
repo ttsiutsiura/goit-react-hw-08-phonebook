@@ -1,20 +1,13 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/operations';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { Register } from '../pages/Register';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { Contacts } from 'pages/Contacts';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
     <div
       style={{
@@ -30,9 +23,24 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/contacts" element={<Contacts />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
         </Route>
       </Routes>
     </div>

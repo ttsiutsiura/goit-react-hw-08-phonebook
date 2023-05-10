@@ -4,8 +4,8 @@ import { Input } from 'components/ContactForm/Form.styled';
 import { Button } from 'components/ContactForm/Form.styled';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 
 const userNameInputId = nanoid();
 const emailInputId = nanoid();
@@ -15,10 +15,21 @@ export function RegisterForm() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const location = useLocation();
-  const backLink = location.state?.from ?? '/';
 
-  const handleSubmit = evt => {};
+  const dispatch = useDispatch();
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+    dispatch(
+      register({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
+  };
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -42,7 +53,6 @@ export function RegisterForm() {
 
   return (
     <>
-      {/* <Link to={backLink}>Back</Link> */}
       <FormEl onSubmit={handleSubmit} style={{ marginTop: 60 }}>
         <Label htmlFor={userNameInputId}>Name</Label>
         <Input
@@ -52,7 +62,7 @@ export function RegisterForm() {
           required
           value={userName}
           onChange={handleChange}
-          placeholder={'Mango'}
+          // placeholder={'Mango'}
           id={userNameInputId}
         />
         <Label htmlFor={emailInputId}>Email</Label>
@@ -63,7 +73,7 @@ export function RegisterForm() {
           required
           value={email}
           onChange={handleChange}
-          placeholder={'mango@gmail.com'}
+          // placeholder={'mango@gmail.com'}
           id={emailInputId}
         />
         <Label htmlFor={passwordInputId}>Password</Label>
@@ -74,7 +84,6 @@ export function RegisterForm() {
           required
           value={password}
           onChange={handleChange}
-          // placeholder={'Post Malone'}
           id={passwordInputId}
         />
         <Button type="submit">Register</Button>
