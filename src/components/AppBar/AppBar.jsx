@@ -1,11 +1,14 @@
-import { NavLink } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
+import { NavItem } from './AppBar.styled';
+import { Button } from 'components/ContactForm/Form.styled';
+import { selectUserEmail } from 'redux/auth/selectors';
 
 export function Appbar() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useAuth();
+  const email = useSelector(selectUserEmail);
 
   return (
     <>
@@ -17,27 +20,28 @@ export function Appbar() {
         }}
       >
         <nav>
-          <NavLink style={{ marginRight: 20 }} to={'/'}>
+          <NavItem style={{ marginRight: 20 }} to={'/'}>
             Home
-          </NavLink>
-          {/* <NavLink to={'/contacts'}>Contacts</NavLink> */}
-          {isLoggedIn && <NavLink to={'/contacts'}>Contacts</NavLink>}
+          </NavItem>
+          {isLoggedIn && (
+            <NavItem to={'/contacts'}>Contacts</NavItem>
+          )}
         </nav>
         {isLoggedIn && (
-          <ul style={{ display: 'flex', gap: 12 }}>
-            <p>Welcome, Kirill</p>
-            <button type="button" onClick={() => dispatch(logOut())}>
+          <ul style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <p style={{ fontSize: 18 }}>{email}</p>
+            <Button type="button" onClick={() => dispatch(logOut())}>
               Log out
-            </button>
+            </Button>
           </ul>
         )}
 
         {!isLoggedIn && (
           <ul>
-            <NavLink style={{ marginRight: 20 }} to={'/register'}>
+            <NavItem style={{ marginRight: 20 }} to={'/register'}>
               Register
-            </NavLink>
-            <NavLink to={'/login'}>Log In</NavLink>
+            </NavItem>
+            <NavItem to={'/login'}>Log In</NavItem>
           </ul>
         )}
       </header>

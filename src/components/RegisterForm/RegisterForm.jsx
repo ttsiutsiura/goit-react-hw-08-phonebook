@@ -56,31 +56,29 @@ export function RegisterForm() {
       <FormEl onSubmit={handleSubmit} style={{ marginTop: 60 }}>
         <Label htmlFor={userNameInputId}>Name</Label>
         <Input
+          autoComplete="off"
           type="text"
           name="name"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={userName}
           onChange={handleChange}
-          // placeholder={'Mango'}
           id={userNameInputId}
         />
         <Label htmlFor={emailInputId}>Email</Label>
         <Input
+          autoComplete="off"
           type="email"
           name="email"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={email}
           onChange={handleChange}
-          // placeholder={'mango@gmail.com'}
           id={emailInputId}
         />
         <Label htmlFor={passwordInputId}>Password</Label>
         <Input
+          autoComplete='off'
           type="password"
           name="password"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={password}
           onChange={handleChange}

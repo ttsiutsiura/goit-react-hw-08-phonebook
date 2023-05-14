@@ -22,7 +22,7 @@ export function ContactCatalog() {
   const contactsCount = useSelector(selectContactsCount);
 
   return (
-    <div>
+    <div style={{ width: 600 }}>
       {<ContactsCaption>Contacts: {contactsCount}</ContactsCaption>}
       {<Filter />}
       {visibleContacts.length === 0 && isloading === false && (

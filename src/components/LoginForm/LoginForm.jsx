@@ -45,13 +45,11 @@ export function LoginForm() {
   };
   return (
     <>
-      {/* <Link to={backLink}>Back</Link> */}
       <FormEl onSubmit={handleSubmit} style={{ marginTop: 60 }}>
         <Label htmlFor={emailInputId}>Email</Label>
         <Input
           type="text"
           name="email"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={email}
           onChange={handleChange}
@@ -61,7 +59,6 @@ export function LoginForm() {
         <Input
           type="password"
           name="password"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={password}
           onChange={handleChange}

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ContactList = styled.ul`
-  max-height: 152px;
+  max-height: 114px;
   overflow: auto;
   padding: 0;
 `;
@@ -36,9 +36,8 @@ export const DeleteButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   transition: box-shadow 100ms linear;
-  :hover {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  }
+  z-index: 100;
+ 
   :active {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
       rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;

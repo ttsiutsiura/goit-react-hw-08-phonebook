@@ -1,5 +1,5 @@
 import { WelcomeView } from 'components/WelcomeView/WelcomeView';
 
-export function Home() {
+export default function Home() {
   return <WelcomeView />;
 }
