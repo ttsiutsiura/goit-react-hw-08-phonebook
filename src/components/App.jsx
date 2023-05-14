@@ -11,6 +11,7 @@ import Register from 'pages/Register';
 import Login from 'pages/Login';
 import Contacts from 'pages/Contacts';
 
+
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
