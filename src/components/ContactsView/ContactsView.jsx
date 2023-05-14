@@ -1,6 +1,5 @@
 import { ContactCatalog } from 'components/ContactCatalog/ContactCatalog';
 import { ContactForm } from 'components/ContactForm/ContactForm';
-import { Link, useLocation } from 'react-router-dom';
 
 export function ContactView() {
   return (
