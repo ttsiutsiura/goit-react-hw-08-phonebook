@@ -1,5 +1,5 @@
 import { Appbar } from 'components/AppBar/AppBar';
-import { Wrapper, Caption } from './Layout.styled';
+import { Wrapper } from './Layout.styled';
 import { Outlet } from 'react-router-dom';
 
 export function Layout() {
